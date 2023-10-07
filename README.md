@@ -18,26 +18,7 @@
  - Don't make changed to other people's code unless abolutely necessary 
  - This project will use EJS templating and hence I repeat again **keep the code modular**
  - Create files and directories based on the following project structure
-```
-.
-├── config
-│   └── .env
-|   └── config.js
-├── .gitignore
-├── package.json
-├── package-lock.json
-├── README.md
-├── routes
-│   ├── feature1_route.js
-│   └── feature2_route.js
-├── src
-│   ├── feature1
-│   └── feature2
-└── static
-    ├── css
-    ├── media
-    └── templates
-```
+
 
 
 **MORE GUIDELINES SOON**
