@@ -6,7 +6,7 @@
 - go to your account and look for this repository and CLONE the repository using
 ` git clone  <url>`
 - cd into cloned directory and create a new branch  and switch to it  
-`git checkout -b <branch name>` branch name should be unique, preferably the name of the feature being implemented or your name
+`git checkout -b <branch name>` branch name should be unique, preferably  your name
 - **All your changes must be pushed to this branch only** 
 
 ## Guidelines
