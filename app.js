@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const path = require('path');
-const morgan = require('morgan');
 require('dotenv').config();
 
 const app = express();
@@ -31,9 +30,6 @@ app.use('/resources', require('./routes/resourcesRoute'))
 app.get('/', (req, res)=>{
   res.redirect('/home')
 })
-
-
-
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
