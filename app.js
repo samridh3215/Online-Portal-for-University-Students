@@ -18,7 +18,6 @@ app.use('/resources', express.static('static'))
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(morgan('combined'));
 
 app.use('/home', require('./routes/homeRoute'))
 app.use('/forum', require('./routes/forumRoute'))
