@@ -15,17 +15,27 @@
 
 <body>
 
-<%- include("partials/header"); -%>
+<%- include("../partials/header"); -%>
 
 
 <section class="post">
+
+  <% if(content.length>0){ %>
   <% content.forEach((item)=>{ %>
-  <div class="post-container">
+  <a href="/forum/<%= item._id %>">
+  <div class="post-container redirect-to-post">
       <h4 class="post-author"> <%= item.author.name %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
-    <!-- <p class ="post-query"> <%= content.query %></p> -->
   </div>
+  </a>
   <% }) %>
+
+  <% }else{ %>
+      <h2>No posts</h2>
+  <% } %>
+
+
+
   <%- include("createPost"); -%>
 </section>
 
@@ -34,10 +44,11 @@
 <div class="new-post-container">
   <button id="new-post">New Post</button>
 </div>
-<%- include("partials/footer"); -%>
+<%- include("../partials/footer"); -%>
 
 <script src="./js/jquery.min.js"></script>
 <script src="./js/forums.controller.js"></script>
 
 </body>
 
+</html>

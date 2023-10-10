@@ -1,4 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId
 
 exports.DbOp = class DataBaseOperations{
   constructor(uri){
@@ -17,6 +18,14 @@ exports.DbOp = class DataBaseOperations{
     const db = this.client.db(databaseName)
     const collection  = db.collection(collectionName)
     let result  = await collection.find(query).toArray()
+    await this.client.close();
+    return result 
+  }
+  async fetchOne(databaseName, collectionName, query){
+    await this.client.connect();
+    const db = this.client.db(databaseName)
+    const collection  = db.collection(collectionName)
+    let result  = await collection.findOne(query)
     await this.client.close();
     return result 
   }
