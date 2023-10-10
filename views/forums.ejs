@@ -23,18 +23,21 @@
   <div class="post-container">
       <h4 class="post-author"> <%= item.author.name %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
-      <% item.replies.forEach((subitem)=>{ %>
-        <p><%= subitem.reply%></p>
-     <% }) %>
     <!-- <p class ="post-query"> <%= content.query %></p> -->
   </div>
   <% }) %>
+  <%- include("createPost"); -%>
 </section>
 
+
+
+<div class="new-post-container">
+  <button id="new-post">New Post</button>
+</div>
 <%- include("partials/footer"); -%>
 
-<script src="/js/jquery.min.js"></script>
-<script src="/js/forums.controller.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/forums.controller.js"></script>
 
 </body>
 

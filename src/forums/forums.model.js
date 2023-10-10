@@ -17,9 +17,18 @@ exports.DbOp = class DataBaseOperations{
     const db = this.client.db(databaseName)
     const collection  = db.collection(collectionName)
     let result  = await collection.find(query).toArray()
-    console.log(result)
     await this.client.close();
     return result 
+  }
+
+  async uploadData(databaseName, collectionName, data){
+    await this.client.connect()
+    const db = this.client.db(databaseName)
+    const collection  = db.collection(collectionName)
+    let result = await collection.insertOne(data)
+    await this.client.close()
+    return result
+
   }
 }
 
