@@ -14,30 +14,61 @@ exports.DbOp = class DataBaseOperations{
   }
 
   async fetchData(databaseName, collectionName, query){
-    await this.client.connect();
-    const db = this.client.db(databaseName)
-    const collection  = db.collection(collectionName)
-    let result  = await collection.find(query).toArray()
-    await this.client.close();
-    return result 
+    try{
+      await this.client.connect();
+      const db = this.client.db(databaseName)
+      const collection  = db.collection(collectionName)
+      let result  = await collection.find(query).toArray()
+      await this.client.close();
+      return result 
+    }catch(err){
+      console.log("IN DataBaseOperation.fetchData", err)
+      throw(err)
+    }
   }
   async fetchOne(databaseName, collectionName, query){
-    await this.client.connect();
-    const db = this.client.db(databaseName)
-    const collection  = db.collection(collectionName)
-    let result  = await collection.findOne(query)
-    await this.client.close();
-    return result 
+    try{
+      await this.client.connect();
+      const db = this.client.db(databaseName)
+      const collection  = db.collection(collectionName)
+      let result  = await collection.findOne(query)
+      await this.client.close();
+      return result 
+    }catch(err){
+      console.log("IN DataBaseOperation.fetchOne", err)
+      throw(err)
+    }
   }
 
   async uploadData(databaseName, collectionName, data){
-    await this.client.connect()
-    const db = this.client.db(databaseName)
-    const collection  = db.collection(collectionName)
-    let result = await collection.insertOne(data)
-    await this.client.close()
-    return result
+    try{
+      await this.client.connect()
+      const db = this.client.db(databaseName)
+      const collection  = db.collection(collectionName)
+      let result = await collection.insertOne(data)
+      await this.client.close()
+      return result
+    }catch(err){
+      console.log("IN DataBaseOperation.uploadData", err)
+      throw(err)
+    }
+  }
 
+  async fuzzySearch(databaseName, collectionName, query) {
+    try {
+      await this.client.connect();
+      const db = this.client.db(databaseName);
+      const collection = db.collection(collectionName);
+      let escapedRegexp = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      let finalRegex = new RegExp(`.*\\b${escapedRegexp}\\b.*`, 'i');
+      let result = await collection.find({$or: [{ "query": { $regex: finalRegex } }, 
+                                                { "title": { $regex: finalRegex } }]
+                                              }).toArray();      
+      return result;
+    } catch(err){
+      console.log("IN DataBaseOperation.fuzzySearch", err)
+      throw(err)
+    }
   }
 }
 

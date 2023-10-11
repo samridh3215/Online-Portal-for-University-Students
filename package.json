@@ -17,6 +17,7 @@
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "mongodb": "^6.1.0",
+    "string-similarity": "^4.0.4",
     "winston": "^3.11.0"
   },
   "devDependencies": {

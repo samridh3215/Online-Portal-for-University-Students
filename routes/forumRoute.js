@@ -42,7 +42,14 @@ router.get("/:id", async (req, res)=>{
   let post = await dbManager.fetchOne("ROOT", "Conversation", {_id: new ObjectId(postID)})
   // console.log(post)
   res.render("forums/post", {"content":post, "intendation":intendation.generateIndentation});
+})
 
+router.get('/search/:query', async (req, res)=>{
+  let query = req.params.query
+  let DbOp  = forumModel.DbOp
+  let dbManager = new DbOp(process.env.URI) 
+  let result = await dbManager.fuzzySearch('ROOT', 'Conversation', query)
+  res.json({status_code: 200, data: result});
 })
 
   
