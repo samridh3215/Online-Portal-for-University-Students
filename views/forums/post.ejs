@@ -24,8 +24,7 @@
               <% content.replies.forEach((item)=>{ %>
                 <p class="reply-author"> <%= item.author.name %></p> 
                 <% var formatted = intendation(item.depth, item.reply)%>
-                <p class = "reply-content"><%= formatted %></p>
-                <!-- <p class = "reply-content"><%= item.reply %></p> -->
+                <p class = "reply-content"> <%= formatted %></p>
 
              <% }) %>
                 </div>  
