@@ -30,6 +30,8 @@ app.get('/', (req, res)=>{
   res.redirect('/home')
 })
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+const host = '0.0.0.0'
+const port = 3000
+app.listen(port, host,function() {
+  console.log("Server listening on", host, "and", port);
 });

@@ -1,3 +1,3 @@
-exports.generateIndentation  = (depth)=> {
-    return '\t'.repeat(depth); // Generate tabs based on the depth
+exports.generateIndentation  = (depth, itemToIntend)=> {
+    return '\t'.repeat(depth)+itemToIntend; // Generate tabs based on the depth
 }

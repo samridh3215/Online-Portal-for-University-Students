@@ -18,7 +18,19 @@
           <div class="post-container">
               <h4 class="post-author"> <%= content.author.name %> </h4>  
               <h2 class="post-title"> <%= content.title %></h2>
-            <!-- <p class ="post-query"> <%= content.query %></p> -->
+              <p class ="post-query"> <%= content.query %></p>
+              <% if (content.replies){ %>
+                <div class ="post-reply-container">
+              <% content.replies.forEach((item)=>{ %>
+                <p class="reply-author"> <%= item.author.name %></p> 
+                <% var formatted = intendation(item.depth, item.reply)%>
+                <p class = "reply-content"><%= formatted %></p>
+                <!-- <p class = "reply-content"><%= item.reply %></p> -->
+
+             <% }) %>
+                </div>  
+              <% } %>
+
           </div>
 
     </section>
