@@ -54,6 +54,18 @@ exports.DbOp = class DataBaseOperations{
     }
   }
 
+  async updateData(databaseName, collectionName, data ,idOfData){
+    try{
+      await this.client.connect()
+      const db = this.client.db(databaseName)
+      const collection  = db.collection(collectionName)
+      collection.updateOne({"_id":new ObjectId(idOfData)}, data)
+    }catch(err){
+      console.log("IN DataBaseOperation.updateData", err)
+      throw(err)
+    }
+  }
+
   async fuzzySearch(databaseName, collectionName, query) {
     try {
       await this.client.connect();

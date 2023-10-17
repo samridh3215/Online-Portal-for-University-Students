@@ -5,11 +5,6 @@ const winston = require('winston');
 const ObjectId = require('mongodb').ObjectId
 
 
-const logger = winston.createLogger({
-                          level:'info',
-                          transports: [new winston.transports.File({filename:'info.json'})]
-                        })
-
 router = express.Router()
 
 router.post("/", async function(req, res){
@@ -52,6 +47,16 @@ router.get('/search/:query', async (req, res)=>{
   res.json({status_code: 200, data: result});
 })
 
+router.post('/updateComments', async (req, res)=>{
+  let postID = req.body.postID
+  let commentObject = req.body.commentObject
+  console.log(postID, commentObject)
+  let DbOp = forumModel.DbOp
+  let dbManager = new DbOp(process.env.URI)
+  let result = await dbManager.updateData('ROOT', 'Conversation', {$push: {"replies": commentObject}}, postID)
+  res.json({status_code:200, status: result})
+})
+
   
 
-module.exports = router
+module.exports = router 

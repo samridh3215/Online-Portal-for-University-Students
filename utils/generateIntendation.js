@@ -1,4 +1,4 @@
 exports.generateIndentation  = (depth, itemToIntend)=> {
-    return '|'+'-'.repeat(3*depth)+'>\t'+itemToIntend; // Generate tabs based on the depth
+    return '.'.repeat(4*depth)+'\t'+itemToIntend; // Generate tabs based on the depth
 }
 

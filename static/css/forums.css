@@ -33,3 +33,8 @@ section{
     flex-direction: column;
 }
 
+
+
+.replies{
+    border: black solid 1px;
+}
