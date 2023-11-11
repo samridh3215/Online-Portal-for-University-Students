@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
+  
 <head>
   <meta charset="utf-8">
   <title>Forums</title>
@@ -23,7 +23,7 @@
   <% if(content.length>0){ %>
   <% content.forEach((item)=>{ %>
   <a href="/forum/<%= item._id %>">
-  <div class="post-container redirect-to-post">
+  <div class="post-container rounded-box">
       <h4 class="post-author"> <%= item.author.name %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
   </div>
@@ -42,7 +42,7 @@
 
 
 <div class="new-post-container">
-  <button id="new-post">New Post</button>
+  <button id="new-post"><img id="newPost-image" src="./media/newPost.png" alt="New Post"></button>
 </div>
 <%- include("../partials/footer"); -%>
 

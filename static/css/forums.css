@@ -4,6 +4,40 @@
     margin: 10px 0 10px 0;
     border: 1px solid black;
 }
+.input-fields{
+    margin:10px;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+    border: 1px solid black;
+}
+
+.enlarge{
+    height: 60%;
+    justify-content: space-around;
+    border: 0px none;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.rounded-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
 
 section{
 
@@ -22,16 +56,60 @@ section{
     margin: 2%;
     bottom: 10%;
 }
+.search-box{
+    display: flex;
+    margin:10px;
+    justify-content: center;
+    font-size: large;
+}
+
+button{
+    border-radius: 10px;
+}
+#new-post{
+    border: none ;
+}
+#newPost-image{
+    width: auto;
+    height: 5vh;
+}
+
+input{
+    width:50%;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+textarea{
+    width:100%;
+    border-radius: 10px;
+    font-size: xx-large;
+    text-align: center;
+}
+.actions-button{
+    display: flex;
+    width:100%;
+    justify-content: space-evenly;
+}
 
 .modal{
     display: none;
-    background-color: cadetblue;
-    width:80%;
+    background-color: #1ABC9C;
+    width:60%;
+    padding: 10px;
     margin: auto;
-    height: 70%;
+    height: 50vh;
+    border-radius: 20px;
     justify-content: space-around;
+    align-items: center;
     flex-direction: column;
 }
+.modal button{
+    width: 40%;
+    height: 30px;
+    font-size: large;
+}
+
 
 
 

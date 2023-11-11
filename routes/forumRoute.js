@@ -11,7 +11,6 @@ router.post("/", async function(req, res){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
     let result = await dbManager.uploadData("ROOT", "Conversation", req.body)
-    console.log(result)
     if(result.acknowledged == true)
       res.json({status_code: 200})
     else

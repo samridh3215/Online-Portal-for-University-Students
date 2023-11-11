@@ -15,7 +15,6 @@ exports.DbOp = class DataBaseOperations{
 
   async fetchData(databaseName, collectionName, query){
     try{
-      await this.client.connect();
       const db = this.client.db(databaseName)
       const collection  = db.collection(collectionName)
       let result  = await collection.find(query).toArray()

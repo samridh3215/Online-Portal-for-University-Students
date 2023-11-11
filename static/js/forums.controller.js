@@ -7,16 +7,18 @@ $('#new-post').on('click', () => {
 $('#close-modal').on('click', () => { $('.modal').css('display', 'none') })
 
 $("#send-post").on('click', () => {
+    let date = new Date()
     let postData = {
         "author": { "name": "Samridh Anand", "SRN": "PES2UG21CS468" },
         "title": $("#new-post-title").val(),
         "query": $("#new-post-content").val(),
+        "date": date.toString().slice(0, 24),
         "replies": [],
     }
     $.ajax({
         method: "POST",
         data: postData,
-        url: 'http://localhost:3000/forum'
+        url: '/forum/'
     }).done((response) => {
         console.log("updated", response)
     }).fail((err) => {
@@ -26,6 +28,8 @@ $("#send-post").on('click', () => {
 
 $('#search-button').on('click', () => {
     let search = $("#search-query").val()
+    if(search.trim(' ')== '')
+    return
     $.ajax({
         url: `/forum/search/${search}`,
         type: 'GET',
@@ -34,7 +38,17 @@ $('#search-button').on('click', () => {
             alert("No match found")
         }
         else {
-            alert(`Found ${result.data.length} match`)
+
+            $('.post').empty()
+            result.data.forEach((item)=>{
+                $('.post').append(`<a href="/forum/${item._id}">
+                <div class="post-container rounded-box">
+                    <h4 class="post-author">${item.author.name}</h4>  
+                    <h2 class="post-title"> ${item.title}</h2>
+                </div>
+                </a>`)
+
+                })
         }
     }).fail((err, code) => { console.log(err, code) })
 })

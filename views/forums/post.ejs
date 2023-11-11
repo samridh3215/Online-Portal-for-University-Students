@@ -16,14 +16,15 @@
 
     <section class="post">
 
-          <div class="post-container">
-              <h4 class="post-author"> <%= content.author.name %> </h4>  
+          <div class="post-container rounded-box">
+            <h5 class="post-date"><%= content.author.name %>  at <%= content.date %></h5>
+              <h4 class="post-author"> </h4>  
               <h2 class="post-title"> <%= content.title %></h2>
-              <p class ="post-query"> <%= content.query %></p>
+              <h3 class ="post-query"> <%= content.query %></h3>
 
 
           </div>
-          <div class="post-comments">
+          <div class="post-comments rounded-box">
             <textarea placeholder="What are your thoughts?" id="post-comment" cols="30" rows="10"></textarea>
             <button id="send-reply">Reply</button>
             <br>
