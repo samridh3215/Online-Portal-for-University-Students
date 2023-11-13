@@ -3,6 +3,15 @@ html {
   position: relative;
 }
 
+body {
+  background-color: #E8ECEF;
+}
+
+.centered {
+    padding-top: 200px;
+    text-align: center;
+}
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -37,6 +46,11 @@ html {
     color: #1abc9c !important;
 }
 
+.btn{
+  height: fit-content;
+  margin-top: 9px;
+}
+
 .footer-padding {
 	padding-bottom: 60px;
 }
@@ -54,4 +68,9 @@ html {
 	margin-top: 25px;
 	font-size: 12px;
   color: #fff;
+}
+
+
+.jumbotron{
+  padding-top: 20px;
 }
