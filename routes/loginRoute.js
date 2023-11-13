@@ -22,7 +22,7 @@ router.use(passport.session());
 
 
 
-mongoose.connect(process.env.URI,{useNewUrlParser: true, dbName: process.env.DB_NAME});
+mongoose.connect(process.env.URI,{useNewUrlParser: true, dbName: 'ROOT'});
 
 const userSchema = new mongoose.Schema({  //object of mongoose schema
     email: String,
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({  //object of mongoose schema
 userSchema.plugin(passportLocalMongoose);
 
 
-const User = new mongoose.model("User",userSchema,process.env.COLL_NAME);
+const User = new mongoose.model("User",userSchema,'Auth');
 
 passport.use(User.createStrategy());
 
