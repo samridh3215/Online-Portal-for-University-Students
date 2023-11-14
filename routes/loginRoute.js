@@ -46,7 +46,7 @@ router.get("/", function(req, res){
 
 router.get("/home",function(req,res){
     if(req.isAuthenticated()){
-        res.render("home");
+        res.render("home",{username: username});
     }else{
         res.redirect("/login");
     }
@@ -73,6 +73,7 @@ router.get('/logout', function(req, res, next) {
 //         }else{
 //             passport.authenticate("local")(req,res,()=>{
 //                 res.redirect("/login/home");
+//                 username= req.user.username;
 //             })
 //         }
 //     })
@@ -92,6 +93,7 @@ router.post("/",function(req,res){
         }else{
             passport.authenticate("local")(req,res,()=>{
                     res.redirect("/login/home");
+                    username = req.user.username;
             });
         }
     })
