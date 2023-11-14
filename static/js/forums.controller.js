@@ -9,7 +9,6 @@ $('#close-modal').on('click', () => { $('.modal').css('display', 'none') })
 $("#send-post").on('click', () => {
     let date = new Date()
     let postData = {
-        "author": { "name": "Samridh Anand", "SRN": "PES2UG21CS468" },
         "title": $("#new-post-title").val(),
         "query": $("#new-post-content").val(),
         "date": date.toString().slice(0, 24),
@@ -18,7 +17,7 @@ $("#send-post").on('click', () => {
     $.ajax({
         method: "POST",
         data: postData,
-        url: '/forum/'
+        url: '/login/forum/'
     }).done((response) => {
         console.log("updated", response)
     }).fail((err) => {
@@ -41,7 +40,7 @@ $('#search-button').on('click', () => {
 
             $('.post').empty()
             result.data.forEach((item)=>{
-                $('.post').append(`<a href="/forum/${item._id}">
+                $('.post').append(`<a href="/login/forum/${item._id}">
                 <div class="post-container rounded-box">
                     <h4 class="post-author">${item.author.name}</h4>  
                     <h2 class="post-title"> ${item.title}</h2>

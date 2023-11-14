@@ -1,15 +1,30 @@
 const express = require('express')
 const forumModel = require('./../src/forums/forums.model')
 const intendation = require('./../utils/generateIntendation');
-const winston = require('winston');
+const bodyParser = require('body-parser')
+const session = require('express-session');
+const passport = require('passport');
 const ObjectId = require('mongodb').ObjectId
 
 
 router = express.Router()
 
+router.use(bodyParser.urlencoded({
+  extended: true
+}));
+router.use(session({
+  secret: "Ourlittlesecret.",
+  resave: false,
+  saveUninitialized: false,
+}));
+
+router.use(passport.initialize());
+router.use(passport.session());
+
 router.post("/", async function(req, res){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
+    req.body["author"] =  { "name":username, "SRN": "PES2UG21CS468" }
     let result = await dbManager.uploadData("ROOT", "Conversation", req.body)
     if(result.acknowledged == true)
       res.json({status_code: 200})
@@ -19,12 +34,15 @@ router.post("/", async function(req, res){
 });
 
 router.get("/", async function(req, res){
+  if(req.isAuthenticated()){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
     let posts = await dbManager.fetchData("ROOT", "Conversation", {})
-    res.render("forums/forums", {"content":posts, "intendation":intendation.generateIndentation});
-    // logger.info(posts)
-
+    res.render("forums/forums",{username: username, "content":posts, "intendation":intendation.generateIndentation});
+  }else{
+      res.redirect("/login");
+  }
+   
   });
 
 router.get("/:id", async (req, res)=>{

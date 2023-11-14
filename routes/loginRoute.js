@@ -1,13 +1,13 @@
 require('dotenv').config();
 const express = require('express')
 const mongoose =require("mongoose");
-const homeRouter = require('./homeRoute');
+const forumRouter = require('./forumRoute');
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-
 const router  = express.Router()
+
 router.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -98,5 +98,9 @@ router.post("/",function(req,res){
         }
     })
 });
+
+
+router.use('/forum', forumRouter)
+router.use('/forum',express.static("static"));
 
 module.exports = router

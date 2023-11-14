@@ -25,7 +25,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 
 //app.use('/home', require('./routes/homeRoute'))
-app.use('/forum', require('./routes/forumRoute'))
+// app.use('/forum', require('./routes/forumRoute'))
 app.use('/payment', require('./routes/paymentRoute'))
 app.use('/results', require('./routes/resultsRoute'))
 app.use('/attendance', require('./routes/attendanceRoute'))
