@@ -92,8 +92,8 @@ router.post("/",function(req,res){
             console.log(err);
         }else{
             passport.authenticate("local")(req,res,()=>{
-                    res.redirect("/login/home");
                     username = req.user.username;
+                    res.redirect("/login/home");
             });
         }
     })

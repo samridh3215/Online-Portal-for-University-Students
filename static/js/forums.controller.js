@@ -6,10 +6,39 @@ $('#new-post').on('click', () => {
 
 $('#close-modal').on('click', () => { $('.modal').css('display', 'none') })
 
+$(".delete-post").on('click', (e)=>{
+    if(confirm('Are you sure you want to delete the post?')){
+        let postID = e.target.id
+        $.ajax({
+            type:"POST",
+            url:'/login/forum/delete',
+            data: {'postID':postID}
+        }).done((res)=>{
+            console.log(res)
+            if(res.status_code==200){
+                alert(`post deleted`)
+            }
+            else{
+                alert("could not process request")
+            }
+        }).fail((err)=>{
+            console.log(err)
+        })
+    }
+    
+})
+
 $("#send-post").on('click', () => {
     let date = new Date()
+    var tags = []
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      tags.push(checkboxes[i].value)
+    }
     let postData = {
         "title": $("#new-post-title").val(),
+        "tags": tags,
         "query": $("#new-post-content").val(),
         "date": date.toString().slice(0, 24),
         "replies": [],
@@ -20,6 +49,9 @@ $("#send-post").on('click', () => {
         url: '/login/forum/'
     }).done((response) => {
         console.log("updated", response)
+        if(response.status_code==200){
+            alert("Post added successfully")
+        }
     }).fail((err) => {
         console.log(err)
     })

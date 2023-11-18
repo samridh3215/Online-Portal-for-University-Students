@@ -13,16 +13,17 @@ exports.DbOp = class DataBaseOperations{
       });
   }
 
-  async fetchData(databaseName, collectionName, query){
+  async aggregateData(databaseName, collectionName, query){
     try{
       const db = this.client.db(databaseName)
       const collection  = db.collection(collectionName)
-      let result  = await collection.find(query).toArray()
-      await this.client.close();
+      let result  = await collection.aggregate([{$sort:{date:-1}}]).toArray()
       return result 
     }catch(err){
       console.log("IN DataBaseOperation.fetchData", err)
       throw(err)
+    }finally{
+      await this.client.close()
     }
   }
   async fetchOne(databaseName, collectionName, query){
@@ -31,11 +32,12 @@ exports.DbOp = class DataBaseOperations{
       const db = this.client.db(databaseName)
       const collection  = db.collection(collectionName)
       let result  = await collection.findOne(query)
-      await this.client.close();
       return result 
     }catch(err){
       console.log("IN DataBaseOperation.fetchOne", err)
       throw(err)
+    }finally{
+      await this.client.close()
     }
   }
 
@@ -45,11 +47,12 @@ exports.DbOp = class DataBaseOperations{
       const db = this.client.db(databaseName)
       const collection  = db.collection(collectionName)
       let result = await collection.insertOne(data)
-      await this.client.close()
       return result
     }catch(err){
       console.log("IN DataBaseOperation.uploadData", err)
       throw(err)
+    }finally{
+      await this.client.close()
     }
   }
 
@@ -58,13 +61,28 @@ exports.DbOp = class DataBaseOperations{
       await this.client.connect()
       const db = this.client.db(databaseName)
       const collection  = db.collection(collectionName)
-      collection.updateOne({"_id":new ObjectId(idOfData)}, data)
+      await collection.updateOne({"_id":new ObjectId(idOfData)}, data)
     }catch(err){
       console.log("IN DataBaseOperation.updateData", err)
       throw(err)
+    }finally{
+      await this.client.close()
     }
   }
 
+  async removeData(databaseName, collectionName, idOfData){
+    try{
+      await this.client.connect()
+      const db = this.client.db(databaseName)
+      const collection  = db.collection(collectionName)
+      await collection.deleteOne({"_id":new ObjectId(idOfData)})
+    }catch(err){
+      console.log("IN DataBaseOperation.removeData", err)
+      throw(err)
+    }finally{
+      await this.client.close()
+    }
+  }
   async fuzzySearch(databaseName, collectionName, query) {
     try {
       await this.client.connect();
@@ -79,6 +97,8 @@ exports.DbOp = class DataBaseOperations{
     } catch(err){
       console.log("IN DataBaseOperation.fuzzySearch", err)
       throw(err)
+    }finally{
+      await this.client.close()
     }
   }
 }

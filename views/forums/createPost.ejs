@@ -1,6 +1,15 @@
 <div class="modal">
     <div class="flex-box enlarge">
-        <textarea class="input-fields" name="Title" id="new-post-title" cols="30" rows="3" placeholder="Enter the title"></textarea>
+        <input class="input-fields" name="Title" id="new-post-title" placeholder="Enter the title">
+        <div class="tag-container">
+
+            <% tags.forEach(tag=>{ %>
+              <div class="tag">
+              <label for="<%= tag %>"><%= tag %></label>
+               <input class="tag-checkbox" id="<%= tag %>" type="checkbox" value="<%= tag %>">  
+              </div>
+            <% }) %>
+          </div>
         <textarea class="input-fields" name="Content" id="new-post-content" cols="30" rows="10" placeholder="Enter your question"></textarea>
     </div>
     <div class="actions-button">

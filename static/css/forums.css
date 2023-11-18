@@ -62,6 +62,20 @@ section{
     justify-content: center;
     font-size: large;
 }
+.tag-container{
+    justify-content: space-between;
+    display: flex;
+    margin:10px;
+    align-items: center;
+    flex-basis: 600px;
+    flex-wrap: wrap;
+
+}
+.tag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 button{
     border-radius: 10px;
@@ -74,13 +88,13 @@ button{
     height: 5vh;
 }
 
-input{
+input[type='text']{
     width:50%;
     height: 5vh;
     border-radius: 10px;
 }
 
-textarea{
+textarea, input.input-fields{
     width:100%;
     border-radius: 10px;
     font-size: xx-large;

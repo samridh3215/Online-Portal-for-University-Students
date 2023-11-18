@@ -6,6 +6,8 @@ const session = require('express-session');
 const passport = require('passport');
 const ObjectId = require('mongodb').ObjectId
 
+var tags = ['DBMS', 'MI', 'CNS', 'GT', 'AC', 'BD', 'DA', 'HCI', 'SE', 'IOT', 'SEM5', 'SEM4', 'SEM3', 'CSE', 'ECE']
+
 
 router = express.Router()
 
@@ -22,14 +24,20 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.post("/", async function(req, res){
-    let DbOp  = forumModel.DbOp
-    let dbManager = new DbOp(process.env.URI)
-    req.body["author"] =  { "name":username, "SRN": "PES2UG21CS468" }
-    let result = await dbManager.uploadData("ROOT", "Conversation", req.body)
-    if(result.acknowledged == true)
-      res.json({status_code: 200})
-    else
-      res.josn({status_code: 500})
+  if(req.isAuthenticated()){
+      let DbOp  = forumModel.DbOp
+      let dbManager = new DbOp(process.env.URI)
+      // username variable has email 
+      let userInfo = await dbManager.fetchOne('ROOT', 'users', {"email":username})
+      req.body["author"] =  { "email":username, "SRN": userInfo['ID'], 'name':userInfo['name']}
+      let result = await dbManager.uploadData("ROOT", "Conversation", req.body)
+      if(result.acknowledged == true)
+        res.json({status_code: 200})
+      else
+        res.josn({status_code: 500})
+    }else{
+      res.redirect("/login");
+  }
 
 });
 
@@ -37,8 +45,8 @@ router.get("/", async function(req, res){
   if(req.isAuthenticated()){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
-    let posts = await dbManager.fetchData("ROOT", "Conversation", {})
-    res.render("forums/forums",{username: username, "content":posts, "intendation":intendation.generateIndentation});
+    let posts = await dbManager.aggregateData("ROOT", "Conversation", {})
+    res.render("forums/forums",{username: username, "content":posts, "intendation":intendation.generateIndentation, 'tags':tags});
   }else{
       res.redirect("/login");
   }
@@ -62,6 +70,14 @@ router.get('/search/:query', async (req, res)=>{
   let dbManager = new DbOp(process.env.URI) 
   let result = await dbManager.fuzzySearch('ROOT', 'Conversation', query)
   res.json({status_code: 200, data: result});
+})
+
+router.post('/delete', async (req, res)=>{
+  let postID = req.body.postID
+  let DbOp  = forumModel.DbOp
+  let dbManager = new DbOp(process.env.URI) 
+  let result = await dbManager.removeData('ROOT', 'Conversation', postID)
+  res.json({status_code: 200, data: result})
 })
 
 router.post('/updateComments', async (req, res)=>{

@@ -16,18 +16,42 @@
 <body>
 
 <%- include("../partials/header"); -%>
-<%- include("../partials/search"); -%>
+
+
+<div class="search-box">
+  <input type="text" name="query-box" pattern="\p{L}" id="search-query">
+
+  <button id="search-button">Search</button>
+
+</div>
+
+<div class="tag-container">
+
+  <% tags.forEach(tag=>{ %>
+    <div class="tag">
+    <label for="<%= tag %>"><%= tag %></label>
+     <input class="tag-checkbox" id="<%= tag %>" type="checkbox" value="<%= tag %>">  
+    </div>
+  <% }) %>
+</div>
 
 <section class="post">
 
   <% if(content.length>0){ %>
   <% content.forEach((item)=>{ %>
+  <div class="post-container rounded-box">  
   <a href="/login/forum/<%= item._id %>">
-  <div class="post-container rounded-box">
       <h4 class="post-author"> <%= item.author.name %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
+    </a>
+      <% if (username == item.author.email){ %>
+          <div class="edit-options">
+            <button>Edit</button>
+            <button class="delete-post" id="<%= item._id %>">Delete</button>
+          </div>
+      <% } %>
   </div>
-  </a>
+
   <% }) %>
 
   <% }else{ %>
