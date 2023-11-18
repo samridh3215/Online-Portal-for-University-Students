@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+
+<body>
+
+  <%- include("partials/adminheader"); -%>
+  <form class="registration-form" action="/admin/add" method="POST">
+    <h2 class="reg-title">Registration Form</h2>
+    <div class="form-group">
+        <div class="half-width">
+          <label for="firstname">First Name</label>
+          <input type="text" id="firstname" class="form-control" placeholder="Enter your first name" required name="fname">
+        </div>
+        <div class="half-width">
+          <label for="lastname">Last Name</label>
+          <input type="text" id="lastname" class="form-control" placeholder="Enter your last name" required name="lname">
+        </div>
+      </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" placeholder="Enter your email" required name="email">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required name="num">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" placeholder="Enter your username" required name="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" placeholder="Enter your password" required name="password">
+    </div>
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select id="type" class="form-control" required name="type" onchange="showHideFields()">
+        <option value="">Select type</option>
+        <option value="Student">Student</option>
+        <option value="Teacher">Teacher</option>
+      </select>
+    </div>
+    <div class="form-group" id="semesterField" style="display: none;">
+      <label for="semester">Semester</label>
+      <input type="text" id="semester" class="form-control" placeholder="Enter your semester" name="sem">
+    </div>
+    <div class="form-group" id="sectionField" style="display: none;">
+      <label for="section">Section</label>
+      <input type="text" id="section" class="form-control" placeholder="Enter your section" name="sec">
+    </div>
+    <button type="submit" class="btn-submit">Register</button>
+  </form>
+
+
+  <script>
+   function showHideFields() {
+      var type = document.getElementById("type").value;
+      var semesterField = document.getElementById("semesterField");
+      var sectionField = document.getElementById("sectionField");
+      
+
+      if (type === "Student") {
+        semesterField.style.display = "block";
+        sectionField.style.display = "block";
+        console.log("change");
+      } else {
+        semesterField.style.display = "none";
+        sectionField.style.display = "none";
+      }
+    }
+  </script>
+
+<%- include("partials/footer"); -%>
+
+</body>

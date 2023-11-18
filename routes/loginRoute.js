@@ -25,14 +25,14 @@ router.use(passport.session());
 mongoose.connect(process.env.URI,{useNewUrlParser: true, dbName: 'ROOT'});
 
 const userSchema = new mongoose.Schema({  //object of mongoose schema
-    email: String,
+    username: String,
     password: String 
 }); 
 
 userSchema.plugin(passportLocalMongoose);
 
 
-const User = new mongoose.model("User",userSchema,'Auth');
+const User = new mongoose.model("User",userSchema,'users');
 
 passport.use(User.createStrategy());
 
@@ -46,7 +46,7 @@ router.get("/", function(req, res){
 
 router.get("/home",function(req,res){
     if(req.isAuthenticated()){
-        res.render("home",{username: username});
+        res.render("home",{fname: fname});
     }else{
         res.redirect("/login");
     }
@@ -92,8 +92,13 @@ router.post("/",function(req,res){
             console.log(err);
         }else{
             passport.authenticate("local")(req,res,()=>{
+                    fname = req.user.fname;
                     username = req.user.username;
+                    if(username === 'admin@email.com'){
+                        res.redirect("/admin")
+                    }else{
                     res.redirect("/login/home");
+                    }
             });
         }
     })
