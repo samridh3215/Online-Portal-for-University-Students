@@ -19,6 +19,7 @@ app.use('/results',express.static("static"));
 app.use('/attendance',express.static("static"));
 app.use('/resources', express.static('static'));
 app.use('/login', express.static('static'));
+app.use('/admin',express.static("static"))
 
 
 app.set('view engine', 'ejs');
@@ -31,6 +32,7 @@ app.use('/results', require('./routes/resultsRoute'))
 app.use('/attendance', require('./routes/attendanceRoute'))
 app.use('/resources', require('./routes/resourcesRoute'))
 app.use('/login', require('./routes/loginRoute'))
+app.use('/admin', require('./routes/adminRoute'))
 
 
 app.get('/', (req, res)=>{

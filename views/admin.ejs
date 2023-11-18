@@ -14,10 +14,25 @@
 
 <body>
 
-  <%- include("partials/header"); -%>
-  <h1>Welcome, <%= fname %>!</h1>
+  <%- include("partials/adminheader"); -%>
+
+  <!-- <h1>Data from MongoDB</h1>
+    <% data.forEach(item => { %>
+      <li class="element"><%= item.fname %> <%= item.lname %></li> 
+       Display other fields as needed 
+    <% }) %>  -->
+
+
+    <% data.forEach(function(user){ %>
+        <div class="box">
+        <h2> <%= user.fname %> </h2>
+        <h5> <%= user.email.substring(0,3) + " ..." %>
+            <a href="/admin/<%= user.fname %>">Read More</a> 
+        </h5>
+        </div>
+    <% }) %>
+
 
 <%- include("partials/footer"); -%>
 
 </body>
-
