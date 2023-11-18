@@ -8,6 +8,14 @@
     margin:10px;
 }
 
+.decorated-tags{
+    font-size: medium; 
+    padding: 3px; 
+    border-radius: 10px; 
+    background-color: #1abc9c; 
+    color: white;
+}
+
 .flex-box{
     display: flex;
     flex-direction: column;

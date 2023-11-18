@@ -39,11 +39,17 @@
 
   <% if(content.length>0){ %>
   <% content.forEach((item)=>{ %>
-  <div class="post-container rounded-box">  
+  <div class="post-container rounded-box" id="<%= item._id %>">  
   <a href="/login/forum/<%= item._id %>">
       <h4 class="post-author"> <%= item.author.name %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
     </a>
+      <p class="included-tags"> 
+      <% item.tags.forEach(tag=>{ %>
+       <span class='decorated-tags'><%=tag%></span>
+      <% }) %>
+    </p>
+
       <% if (username == item.author.email){ %>
           <div class="edit-options">
             <button>Edit</button>

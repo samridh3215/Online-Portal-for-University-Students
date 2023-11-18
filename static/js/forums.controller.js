@@ -30,8 +30,8 @@ $(".delete-post").on('click', (e)=>{
 
 $("#send-post").on('click', () => {
     let date = new Date()
-    var tags = []
-    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    let tags = []
+    let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
 
     for (var i = 0; i < checkboxes.length; i++) {
       tags.push(checkboxes[i].value)
@@ -55,6 +55,30 @@ $("#send-post").on('click', () => {
     }).fail((err) => {
         console.log(err)
     })
+})
+
+$('.tag-checkbox').on('change', (e)=>{
+
+    let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+
+    let posts = $('.post-container').toArray()
+    console.log(posts, checkboxes)
+    if(checkboxes.length==0){
+        console.log('lol')
+        $('.post-container').show(300)
+
+        return 
+    }
+    checkboxes.forEach(box=>{
+        posts.forEach(post=>{
+            if(!post.children[1].textContent.includes(box.value)){
+                $(`#${post.id}`).hide(300)
+            }else{
+                $(`#${post.id}`).show(300)
+            }
+        })
+    })
+
 })
 
 $('#search-button').on('click', () => {
@@ -83,4 +107,3 @@ $('#search-button').on('click', () => {
         }
     }).fail((err, code) => { console.log(err, code) })
 })
-
