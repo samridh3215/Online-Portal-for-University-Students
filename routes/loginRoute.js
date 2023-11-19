@@ -94,6 +94,8 @@ router.post("/",function(req,res){
             passport.authenticate("local")(req,res,()=>{
                     fname = req.user.fname;
                     username = req.user.username;
+                    email = req.user.email
+                    
                     if(username === 'admin@email.com'){
                         res.redirect("/admin")
                     }else{

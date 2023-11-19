@@ -6,11 +6,10 @@ $('#send-reply').on('click', ()=>{
     console.log(postID, comment)
     $.ajax({
         type:'POST',
-        url: '/forum/updateComments/',
+        url: '/login/forum/updateComments/',
         data: {
             "postID": postID,
             "commentObject":{
-                "author":{"name":"Samridh", "SRN":"PES2UG21CS468"},
                 "reply":comment,
                 "depth":1
             }

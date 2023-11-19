@@ -1,20 +1,21 @@
 <div class="modal">
-    <div class="flex-box enlarge">
-        <input class="input-fields" name="Title" id="new-post-title" placeholder="Enter the title">
-        <div class="tag-container">
+  <div class="flex-box enlarge">
+      <input class="input-fields" name="Title" id="new-post-title" placeholder="Enter the title">
+      <div class="tag-container">
 
-            <% tags.forEach(tag=>{ %>
-              <div class="tag">
-              <label for="<%= tag %>"><%= tag %></label>
-               <input class="tag-checkbox" id="<%= tag %>" type="checkbox" value="<%= tag %>">  
-              </div>
-            <% }) %>
+        <% tags.forEach(tag=>{ %>
+          <div>
+           <input class="tag-selection" id="<%= tag %>-select" type="checkbox" value="<%= tag %>">  
+          <label for="<%= tag %>-select"><%= tag %></label>
+      
           </div>
-        <textarea class="input-fields" name="Content" id="new-post-content" cols="30" rows="10" placeholder="Enter your question"></textarea>
-    </div>
-    <div class="actions-button">
-        <button id="send-post">Post</button>
-        <button id="close-modal">Close</button>
-    </div>
+          <% }) %>
+        </div>
+      <textarea class="input-fields" name="Content" id="new-post-content" cols="30" rows="10" placeholder="Enter your question"></textarea>
+  </div>
+  <div class="actions-button">
+      <button id="send-post">Post</button>
+      <button id="close-modal">Close</button>
+  </div>
 
 </div>

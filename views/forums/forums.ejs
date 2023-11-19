@@ -28,9 +28,10 @@
 <div class="tag-container">
 
   <% tags.forEach(tag=>{ %>
-    <div class="tag">
-    <label for="<%= tag %>"><%= tag %></label>
+    <div>
      <input class="tag-checkbox" id="<%= tag %>" type="checkbox" value="<%= tag %>">  
+    <label for="<%= tag %>"><%= tag %></label>
+
     </div>
   <% }) %>
 </div>
@@ -41,16 +42,18 @@
   <% content.forEach((item)=>{ %>
   <div class="post-container rounded-box" id="<%= item._id %>">  
   <a href="/login/forum/<%= item._id %>">
-      <h4 class="post-author"> <%= item.author.name %> </h4>  
+      <h4 class="post-author"> <%= item.author.fname %> </h4>  
       <h2 class="post-title"> <%= item.title %></h2>
     </a>
       <p class="included-tags"> 
-      <% item.tags.forEach(tag=>{ %>
-       <span class='decorated-tags'><%=tag%></span>
-      <% }) %>
+        <% if (item.tags){ %>
+          <% item.tags.forEach(tag=>{ %>
+           <span class='decorated-tags'><%=tag%></span>
+          <% }) %>
+          <% } %>
     </p>
 
-      <% if (username == item.author.email){ %>
+      <% if (email == item.author.email){ %>
           <div class="edit-options">
             <button>Edit</button>
             <button class="delete-post" id="<%= item._id %>">Delete</button>

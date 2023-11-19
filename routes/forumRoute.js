@@ -25,11 +25,13 @@ router.use(passport.session());
 
 router.post("/", async function(req, res){
   if(req.isAuthenticated()){
+
       let DbOp  = forumModel.DbOp
       let dbManager = new DbOp(process.env.URI)
       // username variable has email 
-      let userInfo = await dbManager.fetchOne('ROOT', 'users', {"email":username})
-      req.body["author"] =  { "email":username, "SRN": userInfo['ID'], 'name':userInfo['name']}
+
+      let userInfo = await dbManager.fetchOne('ROOT', 'users', {"email":email})
+      req.body["author"] =  { "email":email, "username": userInfo['username'], 'fname':userInfo['fname']}
       let result = await dbManager.uploadData("ROOT", "Conversation", req.body)
       if(result.acknowledged == true)
         res.json({status_code: 200})
@@ -45,8 +47,8 @@ router.get("/", async function(req, res){
   if(req.isAuthenticated()){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
-    let posts = await dbManager.aggregateData("ROOT", "Conversation", {})
-    res.render("forums/forums",{username: username, "content":posts, "intendation":intendation.generateIndentation, 'tags':tags});
+    let posts = await dbManager.aggregateData("ROOT", "Conversation", {$sort:{date:-1}})
+    res.render("forums/forums",{"email":email, "content":posts, 'tags':tags});
   }else{
       res.redirect("/login");
   }
@@ -81,13 +83,19 @@ router.post('/delete', async (req, res)=>{
 })
 
 router.post('/updateComments', async (req, res)=>{
+  if(req.isAuthenticated()){
   let postID = req.body.postID
   let commentObject = req.body.commentObject
+  commentObject["author"]={"name":fname, "SRN":username}
   console.log(postID, commentObject)
   let DbOp = forumModel.DbOp
   let dbManager = new DbOp(process.env.URI)
   let result = await dbManager.updateData('ROOT', 'Conversation', {$push: {"replies": commentObject}}, postID)
   res.json({status_code:200, status: result})
+  }
+  else{
+    res.redirect("/login");
+  }
 })
 
   

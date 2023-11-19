@@ -89,18 +89,21 @@ router.post("/add",function(req,res){
                         email: req.body.email
                     };
                     people.push(user);
+                    console.log(people)
                 }
             })
 })
 
-router.get("/:fname",function(req,res){
-    var requestedTitle = _.lowerCase(req.params.fname);
-    people.forEach(function(user){
-      var storedTitle= _.lowerCase(user.name);
-      if(requestedTitle === storedTitle){
-        res.render("user",{fname: user.name,email: user.email});
-      }
-    })
+router.get("/:fname",async function(req,res){
+    const requestedUser = await User.findOne({fname:req.params.fname})
+    res.render("user", {fname:requestedUser.fname, email:requestedUser.email})
+    // var requestedTitle = _.lowerCase(req.params.fname);
+    // people.forEach(function(user){
+    //   var storedTitle= _.lowerCase(user.name);
+    //   if(requestedTitle === storedTitle){
+    //     res.render("user",{fname: user.name,email: user.email});
+    //   }
+    // })
   })
 
 

@@ -31,8 +31,8 @@ $(".delete-post").on('click', (e)=>{
 $("#send-post").on('click', () => {
     let date = new Date()
     let tags = []
-    let checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
+    let checkboxes = document.querySelectorAll('input[type=checkbox].tag-selection:checked')
+console.log(checkboxes)
     for (var i = 0; i < checkboxes.length; i++) {
       tags.push(checkboxes[i].value)
     }
