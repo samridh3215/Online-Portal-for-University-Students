@@ -8,6 +8,8 @@
     margin:10px;
 }
 
+
+
 .decorated-tags{
     font-size: medium; 
     padding: 3px; 
@@ -22,6 +24,7 @@
     margin: 10px 0 10px 0;
     border: 1px solid black;
 }
+
 
 .enlarge{
     height: 60%;
@@ -46,6 +49,9 @@ a{
     text-decoration: none;
     color: black;
 }
+#send-reply{
+    width:30%;
+}
 
 section{
 
@@ -57,6 +63,9 @@ section{
     margin-top: 2%;
     justify-content: center;
 }
+
+
+
 .new-post-container{
     display: flex;
     justify-content: end;
@@ -68,10 +77,11 @@ section{
     display: flex;
     margin:10px;
     justify-content: center;
+    align-items: center;
     font-size: large;
 }
 .tag-container{
-    justify-content: space-between;
+    justify-content: space-evenly;
     display: flex;
     margin:10px;
     width: 100%;
@@ -99,7 +109,6 @@ button{
 
 input[type='text']{
     width:50%;
-    height: 5vh;
     border-radius: 10px;
 }
 

@@ -107,7 +107,7 @@ router.post("/",function(req,res){
 });
 
 
-router.use('/forum', forumRouter)
-router.use('/forum',express.static("static"));
+router.use('/forum/', forumRouter)
+router.use('/forum/',express.static("static"));
 
 module.exports = router

@@ -1,5 +1,5 @@
 $('#send-reply').on('click', ()=>{
-    let comment = $('#post-comment').val()
+    let comment = $('#user-comment').val()
     let urlString = window.location.href
     let postID = urlString.split('/').pop() 
     console.log(urlString)

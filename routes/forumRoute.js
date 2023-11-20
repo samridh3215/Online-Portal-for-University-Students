@@ -23,6 +23,8 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
+router.use('/userPosts', express.static("static"))
+
 router.post("/", async function(req, res){
   if(req.isAuthenticated()){
 
@@ -47,8 +49,8 @@ router.get("/", async function(req, res){
   if(req.isAuthenticated()){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
-    let posts = await dbManager.aggregateData("ROOT", "Conversation", {$sort:{date:-1}})
-    res.render("forums/forums",{"email":email, "content":posts, 'tags':tags});
+    let posts = await dbManager.aggregateDataByDate("ROOT", "Conversation")
+    res.render("forums/forums",{"email":email,"username":username, "content":posts, 'tags':tags});
   }else{
       res.redirect("/login");
   }
@@ -64,6 +66,20 @@ router.get("/:id", async (req, res)=>{
   let post = await dbManager.fetchOne("ROOT", "Conversation", {_id: new ObjectId(postID)})
   // console.log(post)
   res.render("forums/post", {"content":post, "intendation":intendation.generateIndentation});
+})
+
+router.get("/userPosts/:username", async (req, res)=>{
+if(req.isAuthenticated()){
+  let userID = req.params.username
+  let DbOp  = forumModel.DbOp
+  let dbManager = new DbOp(process.env.URI)
+  let post = await dbManager.fetch("ROOT", "Conversation", {'author.username':userID})
+  console.log(post)
+  res.render("forums/userPost", {"email":email, "content":post, 'tags':tags});
+}
+else{
+  res.redirect("/login"); 
+}
 })
 
 router.get('/search/:query', async (req, res)=>{

@@ -24,27 +24,27 @@
 
 
           </div>
-          <div class="post-comments rounded-box">
-            <textarea placeholder="What are your thoughts?" id="post-comment" cols="30" rows="10"></textarea>
-            <button id="send-reply">Reply</button>
-            <br>
-            <h3>
-              What other people think
-            </h3>
+          <div class="post-comment rounded-box align-items-center" id="comment-container">
+            <textarea placeholder="What are your thoughts?" id="user-comment" cols="20" rows="3" class="comment-box"></textarea>
+            <button id="send-reply" class="btn btn-success">Reply</button>
+
+          </div>
+
             <div class="replies-container">
+              <h3>
+                Comments
+              </h3>
               <% if (content.replies){ %>
                 <div class ="replies">
               <% content.replies.forEach((item)=>{ %>
-                <div class="reply" style="margin-left:<%= (item.depth-1)*20  %>px;">
-                <p class="reply-author"> <%= item.author.name %></p> 
-                <% var formatted = intendation(item.depth, item.reply)%>
-                <p class = "reply-content"> <%= formatted %></p>
+                <div class="reply rounded-box" style="margin-left:<%= (item.depth-1)*20  %>px;">
+                <h5 class="reply-author"> <%= item.author.name %></h5> 
+                <h2 class = "reply-content"> <%= item.reply %></h2>
                 </div>
              <% }) %>
                 </div>  
               <% } %>
             </div>
-          </div>
 
   
 

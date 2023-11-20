@@ -17,11 +17,11 @@
 
 <%- include("../partials/header"); -%>
 
+
 <div class="search-box">
   <input type="text" name="query-box" pattern="\p{L}" id="search-query">
 
-  <button class="btn btn-info" id="search-button">Search</button>
-  <button class="btn btn-outline-primary"> <a href="/login/forum/userPosts/<%= username %>"> View my posts </a></button>
+  <button id="search-button">Search</button>
 
 </div>
 
@@ -63,7 +63,7 @@
   <% }) %>
 
   <% }else{ %>
-      <h2>No posts</h2>
+      <h2>No posts made by you</h2>
   <% } %>
 
 

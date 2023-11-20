@@ -83,10 +83,12 @@ $('.tag-checkbox').on('change', (e)=>{
 
 $('#search-button').on('click', () => {
     let search = $("#search-query").val()
+    
+    var tags = `<p class="included-tags"> `
     if(search.trim(' ')== '')
     return
     $.ajax({
-        url: `/forum/search/${search}`,
+        url: `/login/forum/search/${search}`,
         type: 'GET',
     }).done((result) => {
         if (result.data.length == 0) {
@@ -96,12 +98,29 @@ $('#search-button').on('click', () => {
 
             $('.post').empty()
             result.data.forEach((item)=>{
-                $('.post').append(`<a href="/login/forum/${item._id}">
-                <div class="post-container rounded-box">
-                    <h4 class="post-author">${item.author.name}</h4>  
+                var tags = `<p class="included-tags"> `
+                if(item.tags.length>0){
+
+                    item.tags.forEach(tag=>{
+                        tags+= `
+                           <span class='decorated-tags'>${tag}</span>
+                        `
+                    })
+
+                }
+                tags+='</p>'
+
+                $('.post').append(`
+                <div class="post-container rounded-box" id='${item._id}'>
+                    <a href="/login/forum/${item._id}">
+                    <h4 class="post-author">${item.author.fname}</h4>  
                     <h2 class="post-title"> ${item.title}</h2>
+                    </a>
+                    ${tags}
+        
                 </div>
-                </a>`)
+                `)
+                
 
                 })
         }
