@@ -36,6 +36,10 @@ console.log(checkboxes)
     for (var i = 0; i < checkboxes.length; i++) {
       tags.push(checkboxes[i].value)
     }
+    if( $("#new-post-title").val().trim() == '' ||  $("#new-post-content").val().trim() =='' || tags == []){
+        alert("Cannot post empty queries")
+        return 
+    }
     let postData = {
         "title": $("#new-post-title").val(),
         "tags": tags,

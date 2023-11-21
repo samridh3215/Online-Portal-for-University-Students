@@ -50,7 +50,9 @@ a{
     color: black;
 }
 #send-reply{
-    width:30%;
+    width:10%;
+    position: relative;
+    left: -45%;
 }
 
 section{
@@ -96,6 +98,10 @@ section{
     align-items: center;
 }
 
+#comment-container{
+    border: 0px;
+}
+
 button{
     border-radius: 10px;
 }
@@ -132,7 +138,8 @@ textarea, input.input-fields{
 
 .modal{
     display: none;
-    background-color: #1ABC9C;
+    border: 2px #1ABC9C solid;
+    background-color: white;
     width:60%;
     padding: 10px;
     margin: auto;

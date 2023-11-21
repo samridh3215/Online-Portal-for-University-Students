@@ -15,6 +15,12 @@ $('#send-reply').on('click', ()=>{
             }
         }
     }).done((res)=>{
+        if(res['status_code']==200){
+            alert("Reply added")
+        }
+        else{
+            alert("Error adding a reply")
+        }
         console.log(res)
     }).fail((err, code)=>{ 
         console.log(err, code)
