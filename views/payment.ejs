@@ -13,7 +13,7 @@
 </head>
 
 
-<body>
+<body class="">
   
 <%- include("partials/header"); -%>
 <!-- <div>
@@ -29,7 +29,7 @@
   </script>
 </div> -->
     
-<table>
+<!-- <table class="table">
   <tr>
     <td>
       <h1 class="pay">Review Paper - 100 per subject</h1>
@@ -46,8 +46,32 @@
       </div>
     </td>
   </tr>
-</table>
+</table> -->
 
+
+<div class="table-container">
+<table class="table">
+  <th>Title</th>
+  <th>Amount</th>
+<% list.forEach(function(payment){ %>
+    <tr>
+      <td><%= payment.title %></td>
+      <td><%= payment.amount%></td>
+      <td>
+        <div class="razorpay-embed-btn" class="button" data-url="https://pages.razorpay.com/pl_N1rBC1Sac8D1le/view" data-text="Pay Now" data-color="#528FF0" data-size="small">
+          <script>
+            (function(){
+              var d=document; var x=!d.getElementById('razorpay-embed-btn-js')
+              if(x){ var s=d.createElement('script'); s.defer=!0;s.id='razorpay-embed-btn-js';
+              s.src='https://cdn.razorpay.com/static/embed_btn/bundle.js';d.body.appendChild(s);} else{var rzp=window['__rzp__'];
+              rzp && rzp.init && rzp.init()}})();
+          </script>
+        </div>
+      </td>
+    </tr>
+<% }) %>
+</table>
+</div>
 
 <!-- </script> -->
 

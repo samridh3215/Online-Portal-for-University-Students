@@ -12,11 +12,33 @@
 </head>
 
 
-<body>
+<body class="body">
 
   <%- include("partials/header"); -%>
   <h1>Welcome, <%= fname %>!</h1>
-
+  <div class="car-container text-center">
+  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://img.freepik.com/free-vector/hackathon-isometric-landing-software-development_107791-2942.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.freepik.com/free-vector/video-gaming-leisure-landing-page-template_23-2149863050.jpg?size=626&ext=jpg&ga=GA1.1.101677632.1700587814&semt=ais" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.freepik.com/free-vector/gradient-halftone-technology-webinar_23-2149078605.jpg?size=626&ext=jpg&ga=GA1.1.101677632.1700587814&semt=ais" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
 <%- include("partials/footer"); -%>
 
 </body>
