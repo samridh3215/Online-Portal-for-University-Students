@@ -94,6 +94,9 @@ router.post("/add",function(req,res){
             })
 })
 
+router.get('/pay', function(req, res){
+    res.render('addPayment')
+})
 router.get("/:fname",async function(req,res){
     const requestedUser = await User.findOne({fname:req.params.fname})
     res.render("user", {fname:requestedUser.fname, email:requestedUser.email})
@@ -112,5 +115,7 @@ router.get('/logout', function(req, res, next) {
       res.redirect('/login');
     });
   });
+
+
 
 module.exports = router
