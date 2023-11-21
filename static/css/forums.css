@@ -112,6 +112,12 @@ input[type='text']{
     border-radius: 10px;
 }
 
+#search-button{
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #1abc9c;
+}
+
 textarea, input.input-fields{
     width:100%;
     border-radius: 10px;

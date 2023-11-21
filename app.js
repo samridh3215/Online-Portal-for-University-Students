@@ -15,8 +15,6 @@ const app = express();
 //app.use('/home', express.static('static'))
 app.use('/forum',express.static("static"));
 app.use('/payment',express.static("static"));
-app.use('/results',express.static("static"));
-app.use('/attendance',express.static("static"));
 app.use('/resources', express.static('static'));
 app.use('/login', express.static('static'));
 app.use('/admin',express.static("static"))
@@ -29,8 +27,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 // app.use('/forum', require('./routes/forumRoute'))
 app.use('/payment', require('./routes/paymentRoute'))
 app.use('/results', require('./routes/resultsRoute'))
-app.use('/attendance', require('./routes/attendanceRoute'))
-app.use('/resources', require('./routes/resourcesRoute'))
 app.use('/login', require('./routes/loginRoute'))
 app.use('/admin', require('./routes/adminRoute'))
 
