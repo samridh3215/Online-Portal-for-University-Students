@@ -25,14 +25,14 @@ router.use(passport.session());
 mongoose.connect(process.env.URI,{useNewUrlParser: true, dbName: 'ROOT'});
 
 const userSchema = new mongoose.Schema({  //object of mongoose schema
-    username: String,
+    email: String,
     password: String 
 }); 
 
 userSchema.plugin(passportLocalMongoose);
 
 
-const User = new mongoose.model("User",userSchema,'users');
+const User = new mongoose.model("User",userSchema,'Auth');
 
 passport.use(User.createStrategy());
 
@@ -46,7 +46,7 @@ router.get("/", function(req, res){
 
 router.get("/home",function(req,res){
     if(req.isAuthenticated()){
-        res.render("home",{fname: fname});
+        res.render("home",{username: username});
     }else{
         res.redirect("/login");
     }
@@ -92,22 +92,19 @@ router.post("/",function(req,res){
             console.log(err);
         }else{
             passport.authenticate("local")(req,res,()=>{
-                    fname = req.user.fname;
-                    username = req.user.username;
-                    email = req.user.email
-                    
-                    if(username === 'admin@email.com'){
-                        res.redirect("/admin")
-                    }else{
                     res.redirect("/login/home");
-                    }
+                    username = req.user.username;
             });
         }
     })
 });
 
 
-router.use('/forum/', forumRouter)
-router.use('/forum/',express.static("static"));
+router.use('/forum', forumRouter)
+router.use('/forum',express.static("static"));
+
+
+router.use('/resources', express.static('static'));
+router.use('/resources', require('./resourcesRoute'));
 
 module.exports = router
