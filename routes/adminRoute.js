@@ -6,7 +6,41 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const _ = require('lodash');
+const axios = require('axios');
 router  = express.Router()
+
+
+const fetchAllPaymentsUrl = 'https://api.razorpay.com/v1/payments';
+
+// Set up basic authentication header with your API key credentials
+const authHeader = {
+  auth: {
+    username: process.env.KEY_ID,
+    password: process.env.KEY_SECRET
+  }
+};
+
+
+function fetchAllPayments() {
+    try {
+     
+      axios.get(fetchAllPaymentsUrl, authHeader).then(function (response) {
+        console.log("hello",response.data);
+        return response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+  
+      //console.log('All Payments:', payments.items);
+     
+    } catch (error) {
+      console.error('Error fetching payments:', error.response ? error.response.data : error.message);
+      throw error;
+    }
+}
+
 
 router.use(bodyParser.urlencoded({
     extended: true
@@ -38,17 +72,23 @@ const userSchema = new mongoose.Schema({  //object of mongoose schema
     }
 }); 
 
+const userSchema2 = new mongoose.Schema({
+    title: String,
+    amount: Number,
+})
+
 userSchema.plugin(passportLocalMongoose);
 
 
 const User = new mongoose.model("Users",userSchema,'users');
+const Pay = new mongoose.model("Pay",userSchema2,'payments');
 
 passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-let people=[{"name": "Sakshi", "email":"sakshi@email.com"},{"name": "Samridh", "email":"sam@email.com"}];
+//let people=[{"name": "Sakshi", "email":"sakshi@email.com"},{"name": "Samridh", "email":"sam@email.com"}];
 
 router.get("/", async(req, res)=>{
     try {
@@ -56,7 +96,7 @@ router.get("/", async(req, res)=>{
         res.render('admin', { data:data }); 
         console.log(people);
       } catch (error) {
-        res.send('Error fetching data');
+        console.log('Error fetching data');
       }
 });
 
@@ -94,9 +134,57 @@ router.post("/add",function(req,res){
             })
 })
 
-router.get('/pay', function(req, res){
-    res.render('addPayment')
+router.get('/pay', async(req, res)=>{
+    const list= await Pay.find();
+    res.render('addPayment',{list: list})
 })
+
+router.post('/pay', async(req, res)=> {
+    try {
+      const newPayment = new Pay({
+        title: req.body.title,
+        amount: req.body.amount
+      });
+      newPayment.save().then(async() => {
+        const list = await Pay.find();
+        res.render("addPayment",{list: list});
+      }).catch((err) => {
+        console.log(err);
+      });
+    } catch (error) {
+      res.status(500).send('Error saving payment data');
+    }
+  });
+
+// router.get('https://api.razorpay.com/v1/payments/',function(req,res){
+//     res.send(req)
+// })
+
+
+
+router.get('/transactions', async(req,res)=>{
+// Call the function to fetch all payments
+axios.get(fetchAllPaymentsUrl, authHeader).then(function (response) {
+    //console.log("hello",response.data);
+    //return response.data
+    res.render("transaction",{paymentdata: response.data.items});
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+    // paymentdata= await fetchAllPayments();
+    //console.log(paymentdata)
+    
+})
+
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/login');
+    });
+  });
+
+
 router.get("/:fname",async function(req,res){
     const requestedUser = await User.findOne({fname:req.params.fname})
     res.render("user", {fname:requestedUser.fname, email:requestedUser.email})
@@ -109,12 +197,6 @@ router.get("/:fname",async function(req,res){
     // })
   })
 
-router.get('/logout', function(req, res, next) {
-    req.logout(function(err) {
-      if (err) { return next(err); }
-      res.redirect('/login');
-    });
-  });
 
 
 
