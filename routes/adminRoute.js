@@ -106,6 +106,11 @@ router.get("/:fname",async function(req,res){
     // })
   })
 
-
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/login');
+    });
+  });
 
 module.exports = router
