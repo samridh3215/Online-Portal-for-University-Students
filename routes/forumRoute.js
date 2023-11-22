@@ -50,7 +50,7 @@ router.get("/", async function(req, res){
     let DbOp  = forumModel.DbOp
     let dbManager = new DbOp(process.env.URI)
     let posts = await dbManager.aggregateDataByDate("ROOT", "Conversation")
-    res.render("forums/forums",{"email":email,"username":username, "content":posts, 'tags':tags});
+    res.render("forums/forums",{"email":email,"username":username, "content":posts,'type':type, 'tags':tags});
   }else{
       res.redirect("/login");
   }
@@ -68,7 +68,7 @@ router.get("/:id", async (req, res)=>{
     res.render('404')
   }
   else{
-    res.render("forums/post", {"content":post, "intendation":intendation.generateIndentation});
+    res.render("forums/post", {"content":post,"type":type, "intendation":intendation.generateIndentation});
 
   }
   // console.log(post)
@@ -81,7 +81,7 @@ if(req.isAuthenticated()){
   let dbManager = new DbOp(process.env.URI)
   let post = await dbManager.fetch("ROOT", "Conversation", {'author.username':userID})
   console.log(post)
-  res.render("forums/userPost", {"email":email, "content":post, 'tags':tags});
+  res.render("forums/userPost", {"email":email, type:type, "content":post, 'tags':tags});
 }
 else{
   res.redirect("/login"); 

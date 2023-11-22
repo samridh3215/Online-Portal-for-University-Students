@@ -139,15 +139,21 @@ textarea, input.input-fields{
 .modal{
     display: none;
     border: 2px #1ABC9C solid;
-    background-color: white;
-    width:60%;
+    background-color: #F5F5F5;
+    backdrop-filter: blur(10px);
+    width:80vw;
     padding: 10px;
     margin: auto;
-    height: 50vh;
+    height: 80vh;
     border-radius: 20px;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+}
+
+.backdrop{
+    backdrop-filter: blur(10px);
+
 }
 .modal button{
     width: 40%;
