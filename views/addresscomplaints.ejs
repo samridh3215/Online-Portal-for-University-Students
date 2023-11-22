@@ -1,0 +1,161 @@
+<!-- views/addresscomplaints.ejs -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Address Complaints</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E8ECEF;
+        }
+
+        .container-complaints {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Styling for the search filter */
+        #complaint-search {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #sec {
+            font-size: 23px;
+            padding: 10px;
+            width: calc(100% - 160px); /* Adjust the width as needed */
+        }
+
+        #sec::placeholder {
+            font-size: 23px;
+        }
+
+        /* Styling for the label "Search by Section" */
+        label[for="sec"] {
+            display: block;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        button {
+            font-size: 23px;
+            padding: 10px;
+            background-color: #4caf50; /* Green color */
+            color: #fff; /* White text */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green color on hover */
+        }
+
+        /* Styling for the "All Complaints" button */
+        .btn-all-complaints {
+            font-size: 23px;
+            padding: 10px;
+            width: 175px; /* Set the width to 20px */
+            background-color: #357534; /* Darker green color */
+            color: #fff; /* White text */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px; /* Add space between the search bar and the button */
+            display: block; /* Make it a block element */
+        }
+
+        .btn-all-complaints:hover {
+            background-color: #2d6029; /* Darker green color on hover */
+        }
+
+        .complaints-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 23px;
+            margin-top: 20px;
+        }
+
+        .complaint-item {
+            margin-bottom: 15px;
+        }
+
+        /* Highlight the issue field */
+        .issue-field {
+            background-color: #ffcccb; /* Light red color */
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .notfound {
+            color: red;
+            font-size: 23px;
+            text-align: center;
+        }
+    </style>
+    <!-- Add your CSS and other dependencies here -->
+</head>
+
+<body>
+
+<%- include("partials/header"); -%>
+
+<div class="container-complaints">
+    <h1>Addressing Complaints</h1>
+
+    <!-- Search filter form -->
+    <form action="/login/addresscomplaints" id="complaint-search">
+        <label for="sec" class="search-label">Search by Section:</label>
+        <input type="text" id="sec" name="sec" placeholder="Enter section">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- All Complaints button -->
+    <a href="/login/addresscomplaints" class="btn btn-success btn-all-complaints">All Complaints</a>
+
+    <% if (sectionNotFound) { %>
+        <p class="notfound">Section not found.</p>
+    <% } %>
+
+    <div class="complaints-list">
+        <% if (complaints.length > 0) { %>
+            <% complaints.forEach(function(complaint) { %>
+                <div class="complaint-item">
+                    <!-- Display and highlight the issue field -->
+                    <div class="issue-field">
+                        <strong>Issue:</strong> <%= complaint.issues %>
+                    </div>
+
+                    <!-- List other fields below the issue field -->
+                    <strong>Name:</strong> <%= complaint.fname %> <%= complaint.lname %><br>
+                    <strong>Email:</strong> <%= complaint.email %><br>
+                    <strong>Phone:</strong> <%= complaint.phone %><br>
+                    <strong>Semester:</strong> <%= complaint.sem %><br>
+                    <strong>Section:</strong> <%= complaint.sec %><br>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No complaints found.</p>
+        <% } %>
+    </div>
+</div>
+
+<%- include("partials/footer"); -%>
+
+</body>
+
+</html>

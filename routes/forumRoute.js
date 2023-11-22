@@ -64,8 +64,14 @@ router.get("/:id", async (req, res)=>{
   let DbOp  = forumModel.DbOp
   let dbManager = new DbOp(process.env.URI)
   let post = await dbManager.fetchOne("ROOT", "Conversation", {_id: new ObjectId(postID)})
+  if(post === null){
+    res.render('404')
+  }
+  else{
+    res.render("forums/post", {"content":post, "intendation":intendation.generateIndentation});
+
+  }
   // console.log(post)
-  res.render("forums/post", {"content":post, "intendation":intendation.generateIndentation});
 })
 
 router.get("/userPosts/:username", async (req, res)=>{

@@ -3,9 +3,49 @@ html {
   position: relative;
 }
 
-body {
-  background-color: #E8ECEF;
+.body {
+	/* background: #f6f5f7; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	margin: -20px 0 50px;
+    background-color: #de8785;
+    background-image: url("https://www.transparenttextures.com/patterns/back-pattern.png");
 }
+
+.extend{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+
+.car-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 80vh;
+}
+
+.carousel{
+  display:flex;
+  justify-content: center;
+}
+
 
 .centered {
     padding-top: 200px;
@@ -51,7 +91,7 @@ body {
   margin-top: 9px;
 }
 
-.footer-padding {
+/* .footer-padding {
 	padding-bottom: 60px;
 }
 
@@ -62,13 +102,13 @@ body {
 	width: 100%;
 	height: 60px;
 	background-color: #1abc9c;
-}
+} */
 
-.footer p {
+/* .footer p {
 	margin-top: 25px;
 	font-size: 12px;
   color: #fff;
-}
+} */
 
 
 .jumbotron{
@@ -76,13 +116,7 @@ body {
 }
 
 
-table {
-  width: 100%;
-  height: 100vh; /* Set table height to fill viewport height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 
 .pay {
@@ -157,8 +191,34 @@ label {
   font-weight: bold;
 }
 
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+table,td,th {
+  border: 1px solid;
+}
+
+.table{
+  width: 40%;
+}
+
+tr:hover {background-color: coral;}
+
 
 .box{
   padding: 5px;
   border-bottom: dashed;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+td{
+  font-weight: bold;
+  font-size: medium;
 }

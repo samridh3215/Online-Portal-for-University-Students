@@ -95,9 +95,14 @@ router.post("/",function(req,res){
                     fname = req.user.fname;
                     username = req.user.username;
                     email = req.user.email
+                    type = req.user.type
                     
                     if(username === 'admin@email.com'){
                         res.redirect("/admin")
+                    }
+                    else if(type=="Teacher"){
+                        res.redirect('/login/addressComplaints')
+
                     }else{
                     res.redirect("/login/home");
                     }
@@ -111,7 +116,14 @@ router.use('/forum/', forumRouter)
 router.use('/forum/',express.static("static"));
 
 
+
 router.use('/resources/', require("./resourcesRoute"))
 router.use('/resources/',express.static("static"));
+
+router.use('/complaints/', require('./complaintsRoute'))
+router.use('/complaints/',express.static("static"));
+
+router.use('/addressComplaints/', require('./addresscomplaintsRoute'))
+router.use('/addressComplaints/',express.static("static"));
 
 module.exports = router
