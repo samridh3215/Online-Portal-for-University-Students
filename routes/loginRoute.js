@@ -115,6 +115,11 @@ router.post("/",function(req,res){
 router.use('/forum/', forumRouter)
 router.use('/forum/',express.static("static"));
 
+
+
+router.use('/resources/', require("./resourcesRoute"))
+router.use('/resources/',express.static("static"));
+
 router.use('/complaints/', require('./complaintsRoute'))
 router.use('/complaints/',express.static("static"));
 
