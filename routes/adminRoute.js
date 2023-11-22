@@ -94,7 +94,6 @@ router.get("/", async(req, res)=>{
     try {
         const data = await User.find(); 
         res.render('admin', { data:data }); 
-        console.log(people);
       } catch (error) {
         console.log('Error fetching data');
       }
