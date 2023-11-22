@@ -86,8 +86,15 @@ router.post('/presentation', async (req, res) => {
 });
 
 router.get('/view/:slug', (req, res)=>{
+    
     const slug = req.params.slug
-    res.sendFile(path.join(__dirname, `../uploads/${slug}.pdf`))
+    
+        if(fs.existsSync(path.join(__dirname, `../uploads/${slug}.pdf`))){
+        res.sendFile(path.join(__dirname, `../uploads/${slug}.pdf`))
+        }else{
+        res.render("404")
+        }
+    
 })
 
 
