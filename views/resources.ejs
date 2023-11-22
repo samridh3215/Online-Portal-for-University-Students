@@ -52,17 +52,21 @@ table.minimalistBlack tfoot td {
 
 <body>
 
-<%- include("partials/header"); -%>
+  <% if(type=="Student"){ %>
+    <%- include("partials/header"); -%>
+    <% }else{ %>
+    <%- include("partials/facultyHeader"); -%>
+  <%}%>
 
 <div>
+  <% if(type=="Teacher"){ %>
   <button id = 'uploadButton' class = "btn btn-dark btn-lg">Upload</button>
-  <button class = "btn btn-dark btn-lg">Download</button>
   
   <input id = 'subject-name' type='text'>
   <input id = 'unit' type='text'>
   
   <input id ="fileUpload" type="file">
-
+<%}%>
   <div>
     <table class="minimalistBlack">
       <!-- <thead>
@@ -78,7 +82,7 @@ table.minimalistBlack tfoot td {
       <tr>
         <td><%=row.name%></td>
         <td><%=row.unit%></td>
-        <td><a href="/login/resources/view/<%=row.name%>-<%=row.unit%>"><button class = "btn btn-dark btn-lg">View ppt</button> </a></td>
+        <td><a target="_blank" href="/login/resources/view/<%=row.name%>-<%=row.unit%>"><button class = "btn btn-dark btn-lg">View ppt</button> </a></td>
       </tr>
     <% })%>
   </tbody>

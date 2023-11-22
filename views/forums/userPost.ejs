@@ -14,10 +14,11 @@
 
 
 <body>
-
-<%- include("../partials/header"); -%>
-
-
+  <% if(type=="Student"){ %>
+    <%- include("../partials/header"); -%>
+    <% }else{ %>
+    <%- include("../partials/facultyHeader"); -%>
+    <%}%>
 <div class="search-box">
   <input type="text" name="query-box" pattern="\p{L}" id="search-query">
 

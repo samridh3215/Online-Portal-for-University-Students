@@ -60,12 +60,15 @@ router.use(passport.session());
 
 
 router.get('/',async (req, res) => {
+    if(req.isAuthenticated()){
     let DbOp  = model.DbOp
     let dbManager = new DbOp(process.env.URI)
     let result = await dbManager.fetch("ROOT","resources",{})
     console.log(result)
-    res.render('resources',{'data':result})//,{data:returnTableWithLinks(['name','unit'], result, '')})
-    
+    res.render('resources',{'data':result, 'type': type})//,{data:returnTableWithLinks(['name','unit'], result, '')})
+    }else{
+        res.redirect('/login')
+    }
 });
 
 // Route for uploading and downloading presentations

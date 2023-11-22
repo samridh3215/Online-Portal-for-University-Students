@@ -12,7 +12,11 @@
   <link rel="stylesheet" href="./css/forums.css">
 </head>
 <body>
+  <% if(type=="Student"){ %>
     <%- include("../partials/header"); -%>
+    <% }else{ %>
+    <%- include("../partials/facultyHeader"); -%>
+    <%}%>
 
     <section class="post">
 
