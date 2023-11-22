@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 //app.use('/home', require('./routes/homeRoute'))
 // app.use('/forum', require('./routes/forumRoute'))
 app.use('/payment', require('./routes/paymentRoute'))
-app.use('/results', require('./routes/resultsRoute'))
 app.use('/login', require('./routes/loginRoute'))
 app.use('/admin', require('./routes/adminRoute'))
 
