@@ -186,7 +186,7 @@ router.get('/logout', function(req, res, next) {
 
 router.get("/:fname",async function(req,res){
     const requestedUser = await User.findOne({fname:req.params.fname})
-    res.render("user", {fname:requestedUser.fname, email:requestedUser.email})
+    res.render("user", {fname:requestedUser.fname,lname: requestedUser.lname, type: requestedUser.type, number: requestedUser.phone ,email:requestedUser.email})
     // var requestedTitle = _.lowerCase(req.params.fname);
     // people.forEach(function(user){
     //   var storedTitle= _.lowerCase(user.name);

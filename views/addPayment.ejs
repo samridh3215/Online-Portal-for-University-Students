@@ -12,6 +12,58 @@
   <link rel="stylesheet" href="./css/payment.css">
 </head>
 
+<style>
+  .flex-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  #addPaymentBtn{
+
+    margin: 20px;
+    height: 40px;
+    width: 200px;
+    font-size: large;
+    border-radius: 10px;
+  }
+  table.minimalistBlack {
+  border: 3px solid #000000;
+  width: 70%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.minimalistBlack td, table.minimalistBlack th {
+  border: 1px solid #000000;
+  padding: 5px 4px;
+}
+table.minimalistBlack tbody td {
+  font-size: 13px;
+}
+table.minimalistBlack thead {
+  background: #CFCFCF;
+  background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+  border-bottom: 3px solid #000000;
+}
+table.minimalistBlack thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  text-align: left;
+}
+table.minimalistBlack tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  border-top: 3px solid #000000;
+}
+table.minimalistBlack tfoot td {
+  font-size: 14px;
+}
+</style>
 
 <body>
 
@@ -19,7 +71,6 @@
   
 
   <div class="container-pay">
-    <button id="addPaymentBtn">Add Payment</button>
     <div id="paymentForm" style="display: none;">
       <h2>Add Payment</h2> 
       <form id="paymentFormFields" action="/admin/pay" method="POST">
@@ -31,7 +82,10 @@
       </form>
     </div>
 </div>
-<table class="table">
+<div class="flex-container">
+  <button id="addPaymentBtn">Add Payment</button>
+
+<table class="minimalistBlack">
   <th>Title</th>
   <th>Amount</th>
 <% list.forEach(function(payment){ %>
@@ -42,7 +96,7 @@
 <% }) %>
 </table>
 
-
+</div>
 
 <script src="./js/jquery.min.js"></script>
 <script src="./js/payment.controller.js"></script>
