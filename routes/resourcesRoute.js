@@ -78,19 +78,30 @@ router.post('/presentation', async (req, res) => {
     // const { semester, subject, unit } = req.body;
     let dataURL = req.body.data['dataURL']
     let name = req.body.data['name']
-    let unit = req.body.data['unit']
-
-    
-    writeFile(name,unit, dataURL)
-               
-    let result = await dbManager.uploadData("ROOT","resources",{name:name,unit:unit})
-    console.log(result)
+    let unit = req.body.data['unit']    
+    if(fs.existsSync(path.join(__dirname, `../uploads/${name}-${unit}.pdf`))){
+        res.send("This file exists")
+    }
+    else{
+        let result = await dbManager.uploadData("ROOT","resources",{name:name,unit:unit, encode:dataURL})
+        writeFile(name, unit, dataURL)
+    }
 
 });
 
-router.get('/view/:slug', (req, res)=>{
-    const slug = req.params.slug
-    res.sendFile(path.join(__dirname, `../uploads/${slug}.pdf`))
+router.get('/view/:slug', async (req, res)=>{
+    const slug = req.params.slug    
+    let name = slug.split('-')[0]
+    let unit = slug.split('-')[1]
+    let DbOp  = model.DbOp
+    let dbManager = new DbOp(process.env.URI)
+    let result = await dbManager.fetchOne("ROOT","resources",{name:name,unit:unit})
+    if(fs.existsSync(path.join(__dirname, `../uploads/${slug}.pdf`))){
+        res.sendFile(path.join(__dirname, `../uploads/${slug}.pdf`))
+    }
+    else{
+        res.render('404')
+    }
 })
 
 

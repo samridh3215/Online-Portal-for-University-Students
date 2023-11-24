@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://dbuser:8XYHfo8TjMWays2U@cluster0.loqftmh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Check if the connection is successful
 const db = mongoose.connection;

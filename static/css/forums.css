@@ -14,7 +14,7 @@
     font-size: medium; 
     padding: 3px; 
     border-radius: 10px; 
-    background-color: #1abc9c; 
+    background-color: #ff4b2b;
     color: white;
 }
 
@@ -121,7 +121,7 @@ input[type='text']{
 #search-button{
     margin-left: 10px;
     margin-right: 10px;
-    background-color: #1abc9c;
+    background-color: #ff4b2b;
 }
 
 textarea, input.input-fields{

@@ -12,15 +12,24 @@
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-
+<style>
+  body{
+    background-image: url('https://img.freepik.com/free-vector/abstract-low-poly-pink-shapes-background_1035-23254.jpg?ga=GA1.1.101677632.1700587814&semt=ais');
+    background-size: fit;
+  }
+</style>
 <body>
 
 <%- include("partials/adminheader") -%>
+<div class="user-container">
+<h1>FirstName: <%= fname %></h1>
+<h3> LastName: <%= lname %></h3>
+<h3> Type: <%= type %></h3>
+<h3> Number: <%= number %></h3>
+<h3> Email: <%= email %></h3>
+</div>
 
-<h1><%= fname %></h1>
-<p> <%= email %></p>
-
-<div class="container-pay">
+<!-- <div class="container-pay">
     <button id="addPaymentBtn">Add Payment</button>
     <div id="paymentForm" style="display: none;">
       <h2>Add Payment</h2>
@@ -47,7 +56,7 @@
   </div>
   <script src="./js/jquery.min.js"></script>
   <script src="./js/payment.controller.js"></script>
-  
+   -->
 
 <%- include("partials/footer") -%>
 
